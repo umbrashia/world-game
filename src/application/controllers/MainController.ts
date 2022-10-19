@@ -18,7 +18,7 @@ export default class MainController implements IMainController {
   static frameY = 0;
 
   static gameFrame = 0;
-  static staggerFrames = 5;
+  static staggerFrames = 3;
 
   constructor() {
     this.mainDiv = document.querySelector<any>(`.canvasDiv`);
