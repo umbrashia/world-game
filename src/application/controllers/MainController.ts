@@ -1,7 +1,11 @@
-import IMainController from "./IMainController";
+import IMainController, {
+  EnumDogState,
+  EnumFrameDogState,
+  TImageState,
+} from "./IMainController";
 import fileImageShadowDog from "../../assets/images/shadow_dog.png";
 
-export default class MainController implements IMainController {
+export default class MainController extends IMainController {
   static imageShadow: HTMLImageElement | CanvasImageSource | null = null;
 
   static xMe: number = 0;
@@ -19,24 +23,7 @@ export default class MainController implements IMainController {
 
   static gameFrame = 0;
   static staggerFrames = 3;
-
-  constructor() {
-    this.mainDiv = document.querySelector<any>(`.canvasDiv`);
-    if (!this.mainDiv) throw new Error("no html div");
-    this.canvas = this.mainDiv
-      .getElementsByClassName(`mainCanvas`)
-      .item(0) as HTMLCanvasElement;
-  }
-
-  initMain() {
-    MainController.CANVAS_WIDTH = this.canvas.width = 600;
-    MainController.CANVAS_HEIGHT = this.canvas.height = 600;
-    MainController.ctxContext = this.canvas.getContext("2d");
-    if (!MainController.ctxContext) throw new Error("2d context not found");
-    MainController.imageShadow = new Image();
-    MainController.imageShadow.src = fileImageShadowDog;
-    MainController.animate();
-  }
+  static dogDisplayState: TImageState;
 
   static animate() {
     MainController.ctxContext?.clearRect(
@@ -64,5 +51,30 @@ export default class MainController implements IMainController {
     }
     MainController.gameFrame++;
     requestAnimationFrame(MainController.animate);
+  }
+
+  constructor() {
+    super();
+    this.mainDiv = document.querySelector<any>(`.canvasDiv`);
+    if (!this.mainDiv) throw new Error("no html div");
+    this.canvas = this.mainDiv
+      .getElementsByClassName(`mainCanvas`)
+      .item(0) as HTMLCanvasElement;
+  }
+
+  initMain() {
+    MainController.CANVAS_WIDTH = this.canvas.width = 600;
+    MainController.CANVAS_HEIGHT = this.canvas.height = 600;
+    MainController.ctxContext = this.canvas.getContext("2d");
+    if (!MainController.ctxContext) throw new Error("2d context not found");
+    MainController.imageShadow = new Image();
+    MainController.imageShadow.src = fileImageShadowDog;
+
+    MainController.dogDisplayState = this.getCompiledDogState({
+      spriteHeight: MainController.spriteHight,
+      spriteWidth: MainController.spriteWidth,
+    });
+    console.log(MainController.dogDisplayState);
+    MainController.animate();
   }
 }
