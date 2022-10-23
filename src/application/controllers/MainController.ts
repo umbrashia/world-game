@@ -22,6 +22,7 @@ export default class MainController extends IMainController {
   static dogDisplayState: TImageState;
 
   static animate() {
+    const tempThing = MainController.dogDisplayState.JUMP;
     MainController.ctxContext?.clearRect(
       0,
       0,
@@ -31,8 +32,8 @@ export default class MainController extends IMainController {
 
     MainController.ctxContext?.drawImage(
       MainController.imageShadow as any,
-      MainController.frameX * MainController.spriteWidth,
-      MainController.frameY * MainController.spriteHight,
+      tempThing?.loc[MainController.frameX].x as any,
+      tempThing?.loc[MainController.frameX].y as number,
       MainController.spriteWidth,
       MainController.spriteHight,
       0,
@@ -40,9 +41,10 @@ export default class MainController extends IMainController {
       MainController.CANVAS_WIDTH,
       MainController.CANVAS_HEIGHT
     );
-    if (MainController.gameFrame % MainController.staggerFrames == 0) {
-      if (MainController.frameX <= 5) MainController.frameX++;
-      else MainController.frameX = 0;
+    if (MainController.gameFrame % 3 === 0) {
+      if (MainController.frameX < (tempThing?.frame as number) - 1) {
+        MainController.frameX++;
+      } else MainController.frameX = 0;
       MainController.gameFrame = 0;
     }
     MainController.gameFrame++;

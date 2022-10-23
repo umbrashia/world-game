@@ -26,7 +26,7 @@ export enum EnumFrameDogState {
 export type TImageState = {
   [key in EnumDogState]?: {
     frame: number;
-    loc?: Array<{ x: number; y: number }>;
+    loc: Array<{ x: number; y: number }>;
   };
 };
 
