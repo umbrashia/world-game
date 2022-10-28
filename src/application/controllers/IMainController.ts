@@ -6,7 +6,7 @@ export enum EnumDogState {
   dizzy = `DIZZY`,
   sit = `SIT`,
   roll = `ROLL`,
-  bite = `bite`,
+  bite = `BITE`,
   ko = `KO`,
   getHit = `GET_HIT`,
 }

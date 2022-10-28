@@ -1,4 +1,4 @@
-import IMainController, { TImageState } from "./IMainController";
+import IMainController, { EnumDogState, TImageState } from "./IMainController";
 import fileImageShadowDog from "../../assets/images/shadow_dog.png";
 
 export default class MainController extends IMainController {
@@ -18,11 +18,14 @@ export default class MainController extends IMainController {
   static frameY = 0;
 
   static gameFrame = 0;
-  static staggerFrames = 3;
+  static staggerFrames = 4;
   static dogDisplayState: TImageState;
 
+  static playerState: EnumDogState = EnumDogState.idle;
+
   static animate() {
-    const tempThing = MainController.dogDisplayState.JUMP;
+    const tempThing =
+      MainController.dogDisplayState[MainController.playerState];
     MainController.ctxContext?.clearRect(
       0,
       0,
@@ -41,7 +44,7 @@ export default class MainController extends IMainController {
       MainController.CANVAS_WIDTH,
       MainController.CANVAS_HEIGHT
     );
-    if (MainController.gameFrame % 3 === 0) {
+    if (MainController.gameFrame % 4 === 0) {
       if (MainController.frameX < (tempThing?.frame as number) - 1) {
         MainController.frameX++;
       } else MainController.frameX = 0;
@@ -73,6 +76,31 @@ export default class MainController extends IMainController {
       spriteWidth: MainController.spriteWidth,
     });
     console.log(MainController.dogDisplayState);
+    this.addSelectAnimation();
     MainController.animate();
+  }
+
+  static onChangeOption(e: Event): any {
+    MainController.playerState = (<HTMLSelectElement>e.target).value as any;
+    MainController.frameX = 0;
+  }
+
+  addSelectAnimation() {
+    const temp: HTMLSelectElement | null =
+      document.querySelector<HTMLSelectElement>(`#selectAnimationOption`);
+    if (!temp) return 0;
+    temp.style.color = "red";
+    for (const key in EnumDogState as any) {
+      if (Object.prototype.hasOwnProperty.call(EnumDogState as any, key)) {
+        const opt = document.createElement(`option`) as HTMLOptionElement;
+        opt.text = key;
+        opt.value = (EnumDogState as any)[key];
+        temp?.add(opt);
+
+        //(EnumDogState as any)[key];
+      }
+    }
+
+    temp?.addEventListener("change", MainController.onChangeOption);
   }
 }
