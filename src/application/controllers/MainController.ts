@@ -85,10 +85,12 @@ export default class MainController extends IMainController {
     MainController.frameX = 0;
   }
 
-  addSelectAnimation() {
+  addSelectAnimation(): void {
     const temp: HTMLSelectElement | null =
       document.querySelector<HTMLSelectElement>(`#selectAnimationOption`);
-    if (!temp) return 0;
+    if (!temp)
+      throw new Error("Select animation Select input comboBox is not found.");
+
     temp.style.color = "red";
     for (const key in EnumDogState as any) {
       if (Object.prototype.hasOwnProperty.call(EnumDogState as any, key)) {
