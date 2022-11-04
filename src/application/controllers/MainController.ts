@@ -21,7 +21,7 @@ export default class MainController extends IMainController {
   staggerFrames = 4;
   dogDisplayState: TImageState = {};
 
-  playerState: EnumDogState = EnumDogState.idle;
+  private playerState: EnumDogState = EnumDogState.idle;
 
   animate() {
     const tempThing = this.dogDisplayState[this.playerState];
@@ -51,6 +51,7 @@ export default class MainController extends IMainController {
   constructor() {
     super();
     this.mainDiv = document.querySelector<any>(`.canvasDiv`);
+    this.playerState = EnumDogState.idle;
     if (!this.mainDiv) throw new Error("no html div");
     this.canvas = this.mainDiv
       .getElementsByClassName(`mainCanvas`)
@@ -97,7 +98,7 @@ export default class MainController extends IMainController {
           tempSelectBox.add(opt);
         }
       }
-      tempSelectBox.addEventListener("change", this.onChangeOption);
+      tempSelectBox.addEventListener("change", (e) => this.onChangeOption(e));
     } catch (error) {
       console.error(`Error: `, error);
     }
