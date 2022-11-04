@@ -86,23 +86,26 @@ export default class MainController extends IMainController {
   }
 
   addSelectAnimation(): void {
-    const temp: HTMLSelectElement | null =
-      document.querySelector<HTMLSelectElement>(`#selectAnimationOption`);
-    if (!temp)
-      throw new Error("Select animation Select input comboBox is not found.");
-
-    temp.style.color = "red";
-    for (const key in EnumDogState as any) {
-      if (Object.prototype.hasOwnProperty.call(EnumDogState as any, key)) {
-        const opt = document.createElement(`option`) as HTMLOptionElement;
-        opt.text = key;
-        opt.value = (EnumDogState as any)[key];
-        temp?.add(opt);
-
-        //(EnumDogState as any)[key];
+    try {
+      const tempSelectBox: HTMLSelectElement | null =
+        document.createElement(`select`);
+      tempSelectBox.setAttribute(`id`, `selectAnimationOption`);
+      this.mainDiv.prepend(tempSelectBox);
+      this.mainDiv.prepend(`select the animaton : `);
+      if (!tempSelectBox)
+        throw new Error("Select animation Select input comboBox is not found.");
+      for (const key in EnumDogState as any) {
+        if (Object.prototype.hasOwnProperty.call(EnumDogState as any, key)) {
+          const opt: HTMLOptionElement | null =
+            document.createElement(`option`);
+          opt.text = key;
+          opt.value = (EnumDogState as any)[key];
+          tempSelectBox.add(opt);
+        }
       }
+      tempSelectBox.addEventListener("change", MainController.onChangeOption);
+    } catch (error) {
+      console.error(`Error: `, error);
     }
-
-    temp?.addEventListener("change", MainController.onChangeOption);
   }
 }
