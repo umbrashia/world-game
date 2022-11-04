@@ -1,14 +1,14 @@
+import { AbstractAppClass } from "../common";
 import { IControllerBody } from "../common/IControllerBody";
-import { IParallaxController } from "./IParallaxController";
 
 export default class ParallaxController
-  extends IParallaxController
+  extends AbstractAppClass
   implements IControllerBody.IControllerBody
 {
   constructor() {
     super();
   }
   initMain(): void {
-    throw new Error("Method not implemented.");
+    super.initMain();
   }
 }

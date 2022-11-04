@@ -31,6 +31,7 @@ export type TImageState = {
 };
 
 export default abstract class IMainController {
+  protected myName = `shantanu`;
   getCompiledDogState(inputs: {
     spriteHeight: number;
     spriteWidth: number;
@@ -40,16 +41,12 @@ export default abstract class IMainController {
     for (const iterator in EnumDogState) {
       const temp: string = (EnumDogState as any)[iterator];
       dogState[temp] = { frame: (EnumFrameDogState as any)[iterator] };
-      dogState[temp].loc = Array(dogState[temp].frame).fill({
-        x: 0,
-        y: 0,
-      });
-      dogState[temp].loc = (dogState[temp].loc as any[]).map((el, index) => {
-        return {
+      dogState[temp].loc = [];
+      for (let frameIndex = 0; frameIndex < dogState[temp].frame; frameIndex++)
+        dogState[temp].loc.push({
           y: countItem * inputs.spriteHeight,
-          x: index * inputs.spriteWidth,
-        };
-      });
+          x: frameIndex * inputs.spriteWidth,
+        });
       countItem++;
     }
     return dogState;
