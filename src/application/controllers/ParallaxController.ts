@@ -8,6 +8,7 @@ export default class ParallaxController
   private backgroundLayers: Array<HTMLImageElement> = [];
   gameSpeed: number = 10;
   x: number = 0;
+  x2: number = 2400;
   constructor() {
     super();
     super.CANVAS_HEIGHT = 700;
@@ -16,7 +17,11 @@ export default class ParallaxController
   doAnimate(): void {
     this.ctxContext?.clearRect(0, 0, this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
     this.ctxContext?.drawImage(this.backgroundLayers[3], this.x, 0);
-    this.x -= this.gameSpeed;
+    this.ctxContext?.drawImage(this.backgroundLayers[3], this.x2, 0);
+    if (this.x < -2400) this.x = 2400 + this.x2 - this.gameSpeed;
+    else this.x -= this.gameSpeed;
+    if (this.x2 < -2400) this.x2 = 2400 + this.x - this.gameSpeed;
+    else this.x2 -= this.gameSpeed;
     requestAnimationFrame(() => this.doAnimate());
   }
   initMain(): void {
