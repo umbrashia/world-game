@@ -85,6 +85,7 @@ export default class MainController extends IMainController {
       const tempSelectBox: HTMLSelectElement | null =
         document.createElement(`select`);
       tempSelectBox.setAttribute(`id`, `selectAnimationOption`);
+      this.mainDiv.prepend(document.createElement(`hr`));
       this.mainDiv.prepend(tempSelectBox);
       this.mainDiv.prepend(`select the animaton : `);
       if (!tempSelectBox)

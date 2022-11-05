@@ -1,3 +1,3 @@
 import MainController from "./controllers/MainController";
-
-export { MainController };
+import ParallaxController from "./controllers/ParallaxController";
+export { MainController, ParallaxController };
