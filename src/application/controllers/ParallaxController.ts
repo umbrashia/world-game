@@ -18,10 +18,15 @@ export default class ParallaxController
     this.ctxContext?.clearRect(0, 0, this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
     this.ctxContext?.drawImage(this.backgroundLayers[3], this.x, 0);
     this.ctxContext?.drawImage(this.backgroundLayers[3], this.x2, 0);
-    if (this.x < -2400) this.x = 2400 + this.x2 - this.gameSpeed;
-    else this.x -= this.gameSpeed;
-    if (this.x2 < -2400) this.x2 = 2400 + this.x - this.gameSpeed;
-    else this.x2 -= this.gameSpeed;
+    if (this.x < -2400) {
+      debugger;
+      this.x = 2400 + this.x2 - this.gameSpeed;
+    } else this.x -= this.gameSpeed;
+    if (this.x2 < -2400) {
+      debugger;
+      this.x2 = 2400 + this.x - this.gameSpeed; //+ this.x - this.gameSpeed;
+    } else this.x2 -= this.gameSpeed;
+
     requestAnimationFrame(() => this.doAnimate());
   }
   initMain(): void {
