@@ -1,5 +1,6 @@
 import { AbstractAppClass } from "../common";
 import { IControllerBody } from "../common/IControllerBody";
+import { NamespaceEntityParallaxLayer } from "../entities";
 
 export default class ParallaxController
   extends AbstractAppClass
@@ -19,11 +20,9 @@ export default class ParallaxController
     this.ctxContext?.drawImage(this.backgroundLayers[3], this.x, 0);
     this.ctxContext?.drawImage(this.backgroundLayers[3], this.x2, 0);
     if (this.x < -2400) {
-      debugger;
       this.x = 2400 + this.x2 - this.gameSpeed;
     } else this.x -= this.gameSpeed;
     if (this.x2 < -2400) {
-      debugger;
       this.x2 = 2400 + this.x - this.gameSpeed; //+ this.x - this.gameSpeed;
     } else this.x2 -= this.gameSpeed;
 
@@ -41,6 +40,7 @@ export default class ParallaxController
       }
       super.initMain();
       document.body.style.background = `black`;
+      new NamespaceEntityParallaxLayer.EntityParallaxLayer();
       this.doAnimate();
     } catch (error) {
       console.error(`error : `, error);
