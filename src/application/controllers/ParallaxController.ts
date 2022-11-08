@@ -6,10 +6,11 @@ export default class ParallaxController
   extends AbstractAppClass
   implements IControllerBody.IControllerBody, IControllerBody.IFunctionAnimate
 {
-  private backgroundLayers: Array<HTMLImageElement> = [];
   gameSpeed: number = 10;
   x: number = 0;
   x2: number = 2400;
+  private layers: Array<NamespaceEntityParallaxLayer.EntityParallaxLayer> = [];
+  private speedModifer: number[] = [0.2, 0.4, 0.6, 0.8, 1];
   constructor() {
     super();
     super.CANVAS_HEIGHT = 700;
@@ -17,30 +18,32 @@ export default class ParallaxController
   }
   doAnimate(): void {
     this.ctxContext?.clearRect(0, 0, this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
-    this.ctxContext?.drawImage(this.backgroundLayers[3], this.x, 0);
-    this.ctxContext?.drawImage(this.backgroundLayers[3], this.x2, 0);
-    if (this.x < -2400) {
-      this.x = 2400 + this.x2 - this.gameSpeed;
-    } else this.x -= this.gameSpeed;
-    if (this.x2 < -2400) {
-      this.x2 = 2400 + this.x - this.gameSpeed; //+ this.x - this.gameSpeed;
-    } else this.x2 -= this.gameSpeed;
-
+    this.layers.forEach((el) => {
+      el.update();
+      el.draw();
+    });
     requestAnimationFrame(() => this.doAnimate());
   }
   initMain(): void {
     try {
+      super.initMain();
       for (let index = 1; index <= 5; index++) {
-        const tempImageBackground = new Image();
-        tempImageBackground.src = new URL(
+        const tempLayer: NamespaceEntityParallaxLayer.EntityParallaxLayer =
+          new NamespaceEntityParallaxLayer.EntityParallaxLayer();
+        tempLayer.ctxContext = this.ctxContext;
+        tempLayer.image = new Image();
+        tempLayer.image.src = new URL(
           `../../assets/images/backgroundLayers/layer-${index}.png`,
           import.meta.url
         ).href;
-        this.backgroundLayers.push(tempImageBackground);
+        tempLayer.width = 2400;
+        tempLayer.height = 700;
+        tempLayer.gameSpeed = this.gameSpeed;
+        tempLayer.speedModifier = this.speedModifer[index - 1];
+        tempLayer.initMain();
+        this.layers.push(tempLayer);
       }
-      super.initMain();
       document.body.style.background = `black`;
-      new NamespaceEntityParallaxLayer.EntityParallaxLayer();
       this.doAnimate();
     } catch (error) {
       console.error(`error : `, error);

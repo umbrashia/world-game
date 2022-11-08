@@ -1,7 +1,9 @@
+import { IControllerBody } from "../common/IControllerBody";
 import { NamespaceEntityData } from "./EntityData";
 
 export namespace NamespaceEntityParallaxLayer {
-  export interface IEntityParallaxLayer {
+  export interface IEntityParallaxLayer
+    extends IControllerBody.IControllerBody {
     update(): void;
     draw(): void;
   }
@@ -11,15 +13,18 @@ export namespace NamespaceEntityParallaxLayer {
   {
     constructor() {
       super();
+    }
+    initMain(): void {
+      this.x2 = this.width;
       this.speed = this.gameSpeed * this.speedModifier;
     }
 
     update(): void {
-      this.speed = this.speed * this.speedModifier;
-      if (this.x <= this.width) this.x = this.width + this.x2 - this.speed;
-      if (this.x2 <= this.width) this.x2 = this.width + this.x - this.speed;
-      this.x = Math.floor(this.x - this.speed);
-      this.x2 = Math.floor(this.x2 - this.speed);
+      const speed = this.speed * this.speedModifier;
+      if (this.x <= -this.width) this.x = this.width + this.x2 - speed;
+      if (this.x2 <= -this.width) this.x2 = this.width + this.x - speed;
+      this.x = Math.floor(this.x - speed);
+      this.x2 = Math.floor(this.x2 - speed);
     }
     draw(): void {
       if (!this.image) throw new Error("ctx is not found..");
