@@ -1,3 +1,3 @@
 import AbstractAppClass from "./AbstractAppClass";
-
-export { AbstractAppClass };
+import AppErrors from "./AppErrors";
+export { AbstractAppClass, AppErrors };

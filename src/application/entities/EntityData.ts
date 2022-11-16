@@ -1,4 +1,22 @@
 export namespace NamespaceEntityData {
+  export class SimpleHtmlData {
+    private _mainDiv: HTMLDivElement = null as any;
+    public get mainDiv(): HTMLDivElement {
+      return this._mainDiv;
+    }
+    public set mainDiv(value: HTMLDivElement) {
+      this._mainDiv = value;
+    }
+    private _canvas: HTMLCanvasElement = null as any;
+    public get canvas(): HTMLCanvasElement {
+      if (!this._canvas) throw new Error("canvas is empty");
+      return this._canvas;
+    }
+    public set canvas(value: HTMLCanvasElement) {
+      this._canvas = value;
+    }
+  }
+
   export class SimpleData {
     private _ctxContext: CanvasRenderingContext2D | null = null;
     public get ctxContext(): CanvasRenderingContext2D | null {

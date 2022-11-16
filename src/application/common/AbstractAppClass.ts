@@ -15,11 +15,11 @@ export default abstract class AbstractAppClass
     this.canvas = this.mainDiv
       .getElementsByClassName(`mainCanvas`)
       .item(0) as HTMLCanvasElement;
+    this.ctxContext = this.canvas.getContext("2d");
+    this.ctxContext = this.canvas.getContext("2d");
   }
   initMain(): void {
     this.CANVAS_WIDTH = this.canvas.width = this.CANVAS_WIDTH || 600;
     this.CANVAS_HEIGHT = this.canvas.height = this.CANVAS_HEIGHT || 600;
-    this.ctxContext = this.canvas.getContext("2d");
-    if (!this.ctxContext) throw new Error("2d context not found");
   }
 }

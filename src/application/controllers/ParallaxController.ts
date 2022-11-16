@@ -1,6 +1,9 @@
 import { AbstractAppClass } from "../common";
 import { IControllerBody } from "../common/IControllerBody";
-import { NamespaceEntityParallaxLayer } from "../entities";
+import {
+  NamespaceEntityParallaxControls,
+  NamespaceEntityParallaxLayer,
+} from "../entities";
 
 export default class ParallaxController
   extends AbstractAppClass
@@ -9,12 +12,14 @@ export default class ParallaxController
   gameSpeed: number = 10;
   x: number = 0;
   x2: number = 2400;
+  private controls: NamespaceEntityParallaxControls.EntityParallaxControl | null;
   private layers: Array<NamespaceEntityParallaxLayer.EntityParallaxLayer> = [];
   private speedModifer: number[] = [0.2, 0.4, 0.6, 0.8, 1];
   constructor() {
     super();
     super.CANVAS_HEIGHT = 700;
     super.CANVAS_WIDTH = 800;
+    this.controls = new NamespaceEntityParallaxControls.EntityParallaxControl();
   }
   doAnimate(): void {
     this.ctxContext?.clearRect(0, 0, this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
@@ -27,6 +32,11 @@ export default class ParallaxController
   initMain(): void {
     try {
       super.initMain();
+      if (this.controls) {
+        this.controls.canvas = this.canvas;
+        this.controls.mainDiv = this.mainDiv;
+      } else throw new Error("controls is not found");
+      this.controls.initMain();
       for (let index = 1; index <= 5; index++) {
         const tempLayer: NamespaceEntityParallaxLayer.EntityParallaxLayer =
           new NamespaceEntityParallaxLayer.EntityParallaxLayer();
