@@ -20,6 +20,7 @@ export namespace NamespaceEntityParallaxLayer {
     }
 
     update(): void {
+      this.speed = this.gameSpeed * this.speedModifier;
       const speed = this.speed * this.speedModifier;
       if (this.x <= -this.width) this.x = this.width + this.x2 - speed;
       if (this.x2 <= -this.width) this.x2 = this.width + this.x - speed;

@@ -9,5 +9,7 @@ export namespace IControllerBody {
 
   export type TGenericEventTarget<T> = Event & { target: T };
 
-  export interface IGameEvent {}
+  export interface IHtmlInputElementEvent<T> {
+    eventChange: (evt: TGenericEventTarget<T> & Event) => void;
+  }
 }

@@ -6,10 +6,12 @@ export namespace NamespaceEntityParallaxControls {
     extends IControllerBody.IControllerBody {}
   export class EntityParallaxControl
     extends NamespaceEntityData.SimpleHtmlData
-    implements IEntityParallaxControl
+    implements
+      IEntityParallaxControl,
+      IControllerBody.IHtmlInputElementEvent<HTMLInputElement>
   {
     public eventChange: (
-      evt?: IControllerBody.TGenericEventTarget<HTMLInputElement> | Event
+      evt?: IControllerBody.TGenericEventTarget<HTMLInputElement> & Event
     ) => void = null as any;
     private inputRangeSpeedControl: HTMLInputElement | null = null;
     private spanGameSpeed: HTMLSpanElement | null = null;
@@ -29,14 +31,17 @@ export namespace NamespaceEntityParallaxControls {
       tempP.appendChild(this.spanGameSpeed);
       this.inputRangeSpeedControl.type = "range";
       this.inputRangeSpeedControl.min = "1";
-      this.inputRangeSpeedControl.max = "20";
+      this.inputRangeSpeedControl.max = "100";
       this.inputRangeSpeedControl.value = "5";
       this.inputRangeSpeedControl.style.width = `100%`;
       if (!this.eventChange)
         throw new Error(
           "inputRangeSpeedControl eventChange must set before mainInit call."
         );
-      this.inputRangeSpeedControl.addEventListener(`change`, this.eventChange);
+      this.inputRangeSpeedControl.addEventListener(
+        `change`,
+        <any>this.eventChange
+      );
       this.mainDiv.appendChild(tempP);
       this.mainDiv.appendChild(this.inputRangeSpeedControl);
     }
