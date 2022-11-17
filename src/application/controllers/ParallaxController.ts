@@ -29,14 +29,22 @@ export default class ParallaxController
     });
     requestAnimationFrame(() => this.doAnimate());
   }
+
+  eventCall(evt?: IControllerBody.TGenericEventTarget<HTMLInputElement>): void {
+    console.log("event", evt?.target);
+  }
+
   initMain(): void {
     try {
       super.initMain();
-      if (this.controls) {
-        this.controls.canvas = this.canvas;
-        this.controls.mainDiv = this.mainDiv;
-      } else throw new Error("controls is not found");
+      if (!this.controls) throw new Error("controls is not found");
+      this.controls.canvas = this.canvas;
+      this.controls.mainDiv = this.mainDiv;
+      this.controls.eventChange = (e: any) => this.eventCall(e);
       this.controls.initMain();
+      this.controls.innerHtmlSpanGameSpeed = <any>this.gameSpeed;
+      this.controls.valueInputRangeSpeedControl = <any>this.gameSpeed;
+
       for (let index = 1; index <= 5; index++) {
         const tempLayer: NamespaceEntityParallaxLayer.EntityParallaxLayer =
           new NamespaceEntityParallaxLayer.EntityParallaxLayer();
