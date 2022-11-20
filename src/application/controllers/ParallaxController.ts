@@ -27,7 +27,7 @@ export default class ParallaxController
   eventChange(evt: Event & { target: HTMLInputElement }) {
     this.gameSpeed = parseInt(evt.target.value);
     this.controls.innerHtmlSpanGameSpeed = evt.target.value;
-    this.layers.forEach((el) => (el.gameSpeed = this.gameSpeed));
+    this.layers.forEach((el) => el.updateSpeed(this.gameSpeed));
   }
 
   doAnimate(): void {

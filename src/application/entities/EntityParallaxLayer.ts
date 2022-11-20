@@ -15,17 +15,20 @@ export namespace NamespaceEntityParallaxLayer {
       super();
     }
     initMain(): void {
-      this.x2 = this.width;
+      this.speed = this.gameSpeed * this.speedModifier;
+    }
+
+    updateSpeed(newValueGameSpeed: number) {
+      this.gameSpeed = newValueGameSpeed;
       this.speed = this.gameSpeed * this.speedModifier;
     }
 
     update(): void {
-      this.speed = this.gameSpeed * this.speedModifier;
       const speed = this.speed * this.speedModifier;
-      if (this.x <= -this.width) this.x = this.width + this.x2 - speed;
-      if (this.x2 <= -this.width) this.x2 = this.width + this.x - speed;
+      if (this.x <= -this.width) {
+        this.x = this.width + this.x - speed;
+      }
       this.x = Math.floor(this.x - speed);
-      this.x2 = Math.floor(this.x2 - speed);
     }
     draw(): void {
       if (!this.image) throw new Error("ctx is not found..");
@@ -38,18 +41,11 @@ export namespace NamespaceEntityParallaxLayer {
       );
       this.ctxContext?.drawImage(
         this.image,
-        this.x2,
+        this.x + this.width,
         this.y,
         this.width,
         this.height
       );
-    }
-    private _x2: number = 0;
-    public get x2(): number {
-      return this._x2;
-    }
-    public set x2(value: number) {
-      this._x2 = value;
     }
   }
 }
