@@ -1,4 +1,8 @@
 export namespace NamespaceEntityData {
+  export interface IEntityBody {
+    update(): void;
+    draw(): void;
+  }
   export class SimpleHtmlData {
     private _mainDiv: HTMLDivElement = null as any;
     public get mainDiv(): HTMLDivElement {
