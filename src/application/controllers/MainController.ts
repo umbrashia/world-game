@@ -1,4 +1,7 @@
-import IMainController, { EnumDogState, TImageState } from "./IMainController";
+import IMainController, {
+  EnumDogState,
+  TImageState,
+} from "./interfaces/IMainController";
 import fileImageShadowDog from "../../assets/images/shadow_dog.png";
 
 export default class MainController extends IMainController {
