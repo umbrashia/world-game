@@ -1,5 +1,5 @@
-import { IControllerBody } from "../common/IControllerBody";
-import { NamespaceEntityData } from "./EntityData";
+import { IControllerBody } from '../common/IControllerBody'
+import { NamespaceEntityData } from './EntityData'
 
 export namespace NamespaceEntityEnemy {
   export class EntityEnemy
@@ -7,16 +7,15 @@ export namespace NamespaceEntityEnemy {
     implements NamespaceEntityData.IEntityBody, IControllerBody.IControllerBody
   {
     constructor() {
-      super();
+      super()
     }
-    initMain(): void {
-      throw new Error("Method not implemented.");
-    }
+    initMain(): void {}
     update(): void {
-      throw new Error("Method not implemented.");
+      this.x += this.speed
+      this.y += this.speed
     }
     draw(): void {
-      throw new Error("Method not implemented.");
+      this.ctxContext?.fillRect(this.x, this.y, this.width, this.height)
     }
   }
 }
