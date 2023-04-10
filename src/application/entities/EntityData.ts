@@ -29,6 +29,27 @@ export namespace NamespaceEntityData {
     public set ctxContext(value: CanvasRenderingContext2D | null) {
       this._ctxContext = value
     }
+    private _frame: number
+    public get frame(): number {
+      return this._frame
+    }
+    public set frame(value: number) {
+      this._frame = value
+    }
+    private _spriteHeight: number
+    public get spriteHeight(): number {
+      return this._spriteHeight
+    }
+    public set spriteHeight(value: number) {
+      this._spriteHeight = value
+    }
+    private _spriteWidth: number
+    public get spriteWidth(): number {
+      return this._spriteWidth
+    }
+    public set spriteWidth(value: number) {
+      this._spriteWidth = value
+    }
     private _image: HTMLImageElement | null = null
     public get image(): HTMLImageElement | null {
       return this._image
