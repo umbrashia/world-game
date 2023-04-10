@@ -15,7 +15,8 @@ export namespace NamespaceEntityEnemy {
       this.y += this.speed
     }
     draw(): void {
-      this.ctxContext?.fillRect(this.x, this.y, this.width, this.height)
+      this.ctxContext?.strokeRect(this.x, this.y, this.width, this.height)
+      this.ctxContext.drawImage(this.image, this.x, this.y, this.width, this.height)
     }
   }
 }

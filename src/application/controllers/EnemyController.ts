@@ -17,7 +17,11 @@ export default class EnemyController
     try {
       super.initMain()
       let indexEnemy: number = 0
-      while (indexEnemy <= 200) {
+      const urls: URL[] = [
+        new URL(`../../assets/images/enemies/enemy1.png`, import.meta.url),
+        new URL(`../../assets/images/enemies/enemy2.png`, import.meta.url),
+      ]
+      while (indexEnemy <= 100) {
         this.enemyBats.push(new NamespaceEntityEnemy.EntityEnemy())
         this.setAllClassValues<NamespaceEntityEnemy.EntityEnemy>(
           this.enemyBats[indexEnemy],
@@ -30,6 +34,8 @@ export default class EnemyController
             speed: Math.random() * 4 - 2,
           }
         )
+        this.enemyBats[indexEnemy].image = new Image()
+        this.enemyBats[indexEnemy].image.src = urls[indexEnemy % 2 == 0 ? 0 : 1].href
         this.enemyBats[indexEnemy].initMain()
         indexEnemy++
       }
