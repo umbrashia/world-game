@@ -1,37 +1,22 @@
-import { AbstractAppClass } from '../common'
 import { IControllerBody } from '../common/IControllerBody'
 import { NamespaceEntityEnemy } from '../entities'
-import { typeEnemyCustomData } from './interfaces/IEnemyController'
+import { IEnemyController } from './interfaces/IEnemyController'
 
 export default class EnemyController
-  extends AbstractAppClass
+  extends IEnemyController
   implements IControllerBody.IControllerBody, IControllerBody.IFunctionAnimate
 {
   private enemyBats: Array<NamespaceEntityEnemy.EntityEnemy> = []
   constructor() {
     super()
     super.CANVAS_HEIGHT = 1000
-    super.CANVAS_WIDTH = 500
+    super.CANVAS_WIDTH = 1000
   }
 
   initMain(): void {
     try {
       super.initMain()
       let indexEnemy: number = 0
-      const tempEnemyCustomData: typeEnemyCustomData[] = [
-        {
-          urlImage: new URL(`../../assets/images/enemies/enemy1.png`, import.meta.url),
-          spriteHeight: 155,
-          spriteWidth: 293,
-          frame: 5,
-        },
-        {
-          urlImage: new URL(`../../assets/images/enemies/enemy2.png`, import.meta.url),
-          spriteHeight: 183,
-          spriteWidth: 266,
-          frame: 5,
-        },
-      ]
       while (indexEnemy <= 100) {
         const evenOdd: number = indexEnemy % 2 == 0 ? 0 : 1
         this.enemyBats.push(new NamespaceEntityEnemy.EntityEnemy())
@@ -42,15 +27,18 @@ export default class EnemyController
             x: this.CANVAS_WIDTH * Math.random(),
             y: this.CANVAS_HEIGHT * Math.random(),
             speed: Math.random() * 4 - 2,
-            spriteWidth: tempEnemyCustomData[evenOdd].spriteWidth,
-            spriteHeight: tempEnemyCustomData[evenOdd].spriteHeight,
-            frame: tempEnemyCustomData[evenOdd].frame,
+            spriteWidth: this.tempEnemyCustomData[evenOdd].spriteWidth,
+            spriteHeight: this.tempEnemyCustomData[evenOdd].spriteHeight,
+            frame: this.tempEnemyCustomData[evenOdd].frame,
           }
         )
-        this.enemyBats[indexEnemy].height = this.enemyBats[indexEnemy].spriteHeight / 2
-        this.enemyBats[indexEnemy].width = this.enemyBats[indexEnemy].spriteWidth / 2
+        this.enemyBats[indexEnemy].height =
+          this.tempEnemyCustomData[evenOdd].spriteHeight / 2
+        this.enemyBats[indexEnemy].width =
+          this.tempEnemyCustomData[evenOdd].spriteWidth / 2
         this.enemyBats[indexEnemy].image = new Image()
-        this.enemyBats[indexEnemy].image.src = tempEnemyCustomData[evenOdd].urlImage.href
+        this.enemyBats[indexEnemy].image.src =
+          this.tempEnemyCustomData[evenOdd].urlImage.href
         this.enemyBats[indexEnemy].initMain()
         indexEnemy++
       }
