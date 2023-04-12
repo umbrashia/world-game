@@ -9,7 +9,7 @@ export type typeEnemyCustomData = {
   frameSpeed?: number
 }
 
-export class IEnemyController
+export abstract class IEnemyController
   extends AbstractAppClass
   implements IControllerBody.IControllerBody
 {
@@ -22,15 +22,15 @@ export class IEnemyController
         urlImage: new URL(`../../../assets/images/enemies/enemy1.png`, import.meta.url),
         spriteHeight: 155,
         spriteWidth: 293,
-        frame: 4,
-        frameSpeed: 2,
+        frame: 5,
+        frameSpeed: 3,
       },
       {
         urlImage: new URL(`../../../assets/images/enemies/enemy2.png`, import.meta.url),
         spriteHeight: 183,
         spriteWidth: 266,
         frame: 5,
-        frameSpeed: 2,
+        frameSpeed: 3,
       },
     ]
   }

@@ -30,6 +30,21 @@ export namespace NamespaceEntityData {
     public set ctxContext(value: CanvasRenderingContext2D) {
       this._ctxContext = value
     }
+    private _canvasHeight: number = 0
+    public get canvasHeight(): number {
+      return this._canvasHeight
+    }
+    public set canvasHeight(value: number) {
+      this._canvasHeight = value
+    }
+    private _canvasWidth: number = 0
+    public get canvasWidth(): number {
+      return this._canvasWidth
+    }
+    public set canvasWidth(value: number) {
+      this._canvasWidth = value
+    }
+
     private _frame: number = 0
     public get frame(): number {
       return this._frame

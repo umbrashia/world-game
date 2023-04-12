@@ -24,19 +24,23 @@ export default class EnemyController
           this.enemyBats[indexEnemy],
           {
             ctxContext: this.ctxContext,
-            x: this.CANVAS_WIDTH * Math.random(),
-            y: this.CANVAS_HEIGHT * Math.random(),
-            speed: Math.random() * 4 - 2,
+            speed: Math.random() * 4 + 2,
             spriteWidth: this.tempEnemyCustomData[evenOdd].spriteWidth,
             spriteHeight: this.tempEnemyCustomData[evenOdd].spriteHeight,
             frame: this.tempEnemyCustomData[evenOdd].frame,
             speedModifier: this.tempEnemyCustomData[evenOdd].frameSpeed,
+            canvasHeight: this.CANVAS_HEIGHT,
+            canvasWidth: this.CANVAS_WIDTH,
           }
         )
         this.enemyBats[indexEnemy].height =
           this.tempEnemyCustomData[evenOdd].spriteHeight / 2
         this.enemyBats[indexEnemy].width =
           this.tempEnemyCustomData[evenOdd].spriteWidth / 2
+        this.enemyBats[indexEnemy].x =
+          Math.random() * (this.CANVAS_WIDTH - this.enemyBats[indexEnemy].width)
+        this.enemyBats[indexEnemy].y =
+          Math.random() * (this.CANVAS_HEIGHT - this.enemyBats[indexEnemy].height)
         this.enemyBats[indexEnemy].image = new Image()
         this.enemyBats[indexEnemy].image.src =
           this.tempEnemyCustomData[evenOdd].urlImage.href

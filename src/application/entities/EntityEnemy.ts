@@ -12,12 +12,13 @@ export namespace NamespaceEntityEnemy {
       super()
     }
     initMain(): void {
-      return
+      this.speedModifier = Math.floor(Math.random() * this.speedModifier + 1)
     }
     update(): void {
-      this.x += this.speed
-      this.y += this.speed
-      if (this.localFrameSpeed % 2 == 0)
+      if (this.localFrameSpeed % this.speedModifier == 0) this.x -= this.speed
+      //this.y += Math.random() * 3 - 1.5
+      if (this.x + this.width < 0) this.x = this.canvasWidth
+      if (this.localFrameSpeed % this.speedModifier == 0)
         this.frame > this.localFrame ? this.localFrame++ : (this.localFrame = 0)
       if (this.localFrame >= 100) this.localFrameSpeed = 0
       this.localFrameSpeed++
