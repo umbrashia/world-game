@@ -9,7 +9,7 @@ export default abstract class AbstractAppClass
   protected canvas: HTMLCanvasElement
   protected CANVAS_WIDTH: number = 0
   protected CANVAS_HEIGHT: number = 0
-  protected ctxContext: CanvasRenderingContext2D | null = null
+  protected ctxContext: CanvasRenderingContext2D = {} as any
 
   constructor() {
     super()
@@ -18,8 +18,10 @@ export default abstract class AbstractAppClass
     this.canvas = this.mainDiv
       .getElementsByClassName(`mainCanvas`)
       .item(0) as HTMLCanvasElement
-    this.ctxContext = this.canvas.getContext('2d')
-    this.ctxContext = this.canvas.getContext('2d')
+    const tempCtx = this.canvas.getContext('2d')
+    if (!tempCtx) throw new Error('ctx not found...')
+    this.ctxContext = tempCtx
+    this.ctxContext = tempCtx
   }
   initMain(): void {
     this.CANVAS_WIDTH = this.canvas.width = this.CANVAS_WIDTH || 600

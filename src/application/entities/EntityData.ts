@@ -3,6 +3,7 @@ export namespace NamespaceEntityData {
     update(): void
     draw(): void
   }
+
   export class SimpleHtmlData {
     private _mainDiv: HTMLDivElement = null as any
     public get mainDiv(): HTMLDivElement {
@@ -22,11 +23,11 @@ export namespace NamespaceEntityData {
   }
 
   export class SimpleData {
-    private _ctxContext: CanvasRenderingContext2D | null = null
-    public get ctxContext(): CanvasRenderingContext2D | null {
+    private _ctxContext: CanvasRenderingContext2D = null as any
+    public get ctxContext(): CanvasRenderingContext2D {
       return this._ctxContext
     }
-    public set ctxContext(value: CanvasRenderingContext2D | null) {
+    public set ctxContext(value: CanvasRenderingContext2D) {
       this._ctxContext = value
     }
     private _frame: number = 0

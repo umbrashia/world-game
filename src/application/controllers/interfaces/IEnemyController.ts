@@ -6,6 +6,7 @@ export type typeEnemyCustomData = {
   spriteWidth: number
   spriteHeight: number
   frame: number
+  frameSpeed?: number
 }
 
 export class IEnemyController
@@ -21,13 +22,15 @@ export class IEnemyController
         urlImage: new URL(`../../../assets/images/enemies/enemy1.png`, import.meta.url),
         spriteHeight: 155,
         spriteWidth: 293,
-        frame: 5,
+        frame: 4,
+        frameSpeed: 2,
       },
       {
         urlImage: new URL(`../../../assets/images/enemies/enemy2.png`, import.meta.url),
         spriteHeight: 183,
         spriteWidth: 266,
         frame: 5,
+        frameSpeed: 2,
       },
     ]
   }

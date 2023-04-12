@@ -30,6 +30,7 @@ export default class EnemyController
             spriteWidth: this.tempEnemyCustomData[evenOdd].spriteWidth,
             spriteHeight: this.tempEnemyCustomData[evenOdd].spriteHeight,
             frame: this.tempEnemyCustomData[evenOdd].frame,
+            speedModifier: this.tempEnemyCustomData[evenOdd].frameSpeed,
           }
         )
         this.enemyBats[indexEnemy].height =

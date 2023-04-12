@@ -6,24 +6,27 @@ export namespace NamespaceEntityEnemy {
     extends NamespaceEntityData.SimpleData
     implements NamespaceEntityData.IEntityBody, IControllerBody.IControllerBody
   {
-    #localFrame: number
+    private localFrame: number = 0
+    private localFrameSpeed: number = 0
     constructor() {
       super()
     }
     initMain(): void {
-      this.#localFrame = 0
-      return null
+      return
     }
     update(): void {
       this.x += this.speed
       this.y += this.speed
-      this.frame > this.#localFrame ? this.#localFrame++ : (this.#localFrame = 0)
+      if (this.localFrameSpeed % 2 == 0)
+        this.frame > this.localFrame ? this.localFrame++ : (this.localFrame = 0)
+      if (this.localFrame >= 100) this.localFrameSpeed = 0
+      this.localFrameSpeed++
     }
     draw(): void {
       // this.ctxContext?.strokeRect(this.x, this.y, this.width, this.height)
       this.ctxContext.drawImage(
         this.image,
-        this.spriteWidth * this.#localFrame,
+        this.spriteWidth * this.localFrame,
         0,
         this.spriteWidth,
         this.spriteHeight,
